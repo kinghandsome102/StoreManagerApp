@@ -15,7 +15,10 @@ namespace StoreManagerApp.ViewModel
 
         public MainViewModel() 
         {
-            LoadedWindowCommad = new RelayCommand<object>((p) => { return true; }, (p) => { Loaded(); });
+            LoadedWindowCommad = new RelayCommand<object>((p) => { return true; }, 
+                (p) => { 
+                    Loaded(); 
+                });
         }
         public void Loaded()
         {

@@ -4,11 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StoreManagerApp.UserControlApp"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
+             Name="ucControlBar"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--Event Mouse Move Start-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--Event Mouse End-->
     <Grid>
-
+        <!--Color Bar Start-->
         <materialDesign:ColorZone Mode="PrimaryMid" >
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right"  Background="Transparent" Orientation="Horizontal">
@@ -18,7 +27,7 @@
                             <Setter Property="Width" Value="40"></Setter>
                         </Style>
                     </StackPanel.Resources>
-                    <Button Command="{Binding MinimizeWindowCommand}" 
+                    <Button Command="{Binding MinimizeWindowCommnand}" 
                         CommandParameter="{Binding ElementName=ucControlBar}"
                     ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded" Background="#00CA4E">
                         <materialDesign:PackIcon Kind="WindowMinimize" />
@@ -41,5 +50,6 @@
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
+        <!--Color Bar End-->
     </Grid>
 </UserControl>

@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:StoreManagerApp.View"
         mc:Ignorable="d"
         
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:StoreManagerApp.UserControlApp"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -18,10 +20,28 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
+        DataContext="{StaticResource MainVM}"
         
         Title="Store Manager" Height="450" Width="800">
-    
+    <!--Event Load Start-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--Event Load end-->
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--Add Control Bar Start-->
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC/>
+        </Grid>
+        <!--Add Control Bar End-->
+        <Grid Grid.Row="1">
+            
+        </Grid>
     </Grid>
 </Window>
