@@ -88,6 +88,7 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>StoreManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\Issue.cs">
       <DependentUpon>StoreManager.tt</DependentUpon>
     </Compile>

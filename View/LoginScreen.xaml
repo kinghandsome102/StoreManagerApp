@@ -19,6 +19,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
+        x:Name="LoginWindow"
         
         Title="Login" Height="450" Width="800">
     <Grid>
@@ -28,7 +29,7 @@
         </Grid.RowDefinitions>
         <!--Add Control Bar start-->
         <Grid Grid.Row="0">
-            <uc:ControlBarUC></uc:ControlBarUC>
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=LoginWindow}"></uc:ControlBarUC>
         </Grid>
         <!--Add Control Bar End-->
         <Grid Grid.Row="1">

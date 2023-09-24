@@ -21,6 +21,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         DataContext="{StaticResource MainVM}"
+        x:Name="StoreManager"
         
         Title="Store Manager" Height="600" Width="800">
     <!--Event Load Start-->
@@ -37,7 +38,7 @@
         </Grid.RowDefinitions>
         <!--Add Control Bar Start-->
         <Grid Grid.Row="0">
-            <uc:ControlBarUC/>
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=StoreManager}"/>
         </Grid>
         <!--Add Control Bar End-->
         <Grid Grid.Row="1">
