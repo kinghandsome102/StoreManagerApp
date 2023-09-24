@@ -1,0 +1,638 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StoreManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="MoreInfo" Type="nvarchar(max)" />
+          <Property Name="ContractDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IssueInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdProduct" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IDIssue" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IDCustomer" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="IssuePrice" Type="float" />
+          <Property Name="Status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="IdUnit" Type="int" Nullable="false" />
+          <Property Name="IdSuplier" Type="int" Nullable="false" />
+          <Property Name="QRCode" Type="nvarchar(max)" />
+          <Property Name="BarCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ReceiptDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ReceiptInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdProduct" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdReceipt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="ReceiptPrice" Type="float" />
+          <Property Name="IssuePrice" Type="float" />
+          <Property Name="Status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Suplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="MoreInfo" Type="nvarchar(max)" />
+          <Property Name="ContractDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__IssueInfo__IDCus__4BAC3F29">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="IssueInfo" Type="Self.IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IssueInfo__IDIss__4D94879B">
+          <End Role="Issue" Type="Self.Issue" Multiplicity="1" />
+          <End Role="IssueInfo" Type="Self.IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Issue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IDIssue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IssueInfo__IdPro__4CA06362">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="IssueInfo" Type="Self.IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IdSupli__4E88ABD4">
+          <End Role="Suplier" Type="Self.Suplier" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdSuplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IdUnit__4F7CD00D">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptIn__IdPro__5070F446">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ReceiptInfo" Type="Self.ReceiptInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptInfo">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptIn__IdRec__5165187F">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
+          <End Role="ReceiptInfo" Type="Self.ReceiptInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptInfo">
+              <PropertyRef Name="IdReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__IdRole__4316F928">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StoreManagerModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Issue" EntityType="Self.Issue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IssueInfo" EntityType="Self.IssueInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptInfo" EntityType="Self.ReceiptInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suplier" EntityType="Self.Suplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__IssueInfo__IDCus__4BAC3F29" Association="Self.FK__IssueInfo__IDCus__4BAC3F29">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IssueInfo__IDIss__4D94879B" Association="Self.FK__IssueInfo__IDIss__4D94879B">
+            <End Role="Issue" EntitySet="Issue" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IssueInfo__IdPro__4CA06362" Association="Self.FK__IssueInfo__IdPro__4CA06362">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IdSupli__4E88ABD4" Association="Self.FK__Product__IdSupli__4E88ABD4">
+            <End Role="Suplier" EntitySet="Suplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IdUnit__4F7CD00D" Association="Self.FK__Product__IdUnit__4F7CD00D">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptIn__IdPro__5070F446" Association="Self.FK__ReceiptIn__IdPro__5070F446">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReceiptInfo" EntitySet="ReceiptInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptIn__IdRec__5165187F" Association="Self.FK__ReceiptIn__IdRec__5165187F">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptInfo" EntitySet="ReceiptInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__IdRole__4316F928" Association="Self.FK__Users__IdRole__4316F928">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StoreManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StoreManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="StoreManagerModel.Customer" />
+          <EntitySet Name="Issue" EntityType="StoreManagerModel.Issue" />
+          <EntitySet Name="IssueInfo" EntityType="StoreManagerModel.IssueInfo" />
+          <EntitySet Name="Product" EntityType="StoreManagerModel.Product" />
+          <EntitySet Name="Receipt" EntityType="StoreManagerModel.Receipt" />
+          <EntitySet Name="ReceiptInfo" EntityType="StoreManagerModel.ReceiptInfo" />
+          <EntitySet Name="Suplier" EntityType="StoreManagerModel.Suplier" />
+          <EntitySet Name="Unit" EntityType="StoreManagerModel.Unit" />
+          <EntitySet Name="UserRole" EntityType="StoreManagerModel.UserRole" />
+          <EntitySet Name="Users" EntityType="StoreManagerModel.Users" />
+          <AssociationSet Name="FK__IssueInfo__IDCus__4BAC3F29" Association="StoreManagerModel.FK__IssueInfo__IDCus__4BAC3F29">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IssueInfo__IDIss__4D94879B" Association="StoreManagerModel.FK__IssueInfo__IDIss__4D94879B">
+            <End Role="Issue" EntitySet="Issue" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IssueInfo__IdPro__4CA06362" Association="StoreManagerModel.FK__IssueInfo__IdPro__4CA06362">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="IssueInfo" EntitySet="IssueInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IdSupli__4E88ABD4" Association="StoreManagerModel.FK__Product__IdSupli__4E88ABD4">
+            <End Role="Suplier" EntitySet="Suplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IdUnit__4F7CD00D" Association="StoreManagerModel.FK__Product__IdUnit__4F7CD00D">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptIn__IdPro__5070F446" Association="StoreManagerModel.FK__ReceiptIn__IdPro__5070F446">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ReceiptInfo" EntitySet="ReceiptInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptIn__IdRec__5165187F" Association="StoreManagerModel.FK__ReceiptIn__IdRec__5165187F">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptInfo" EntitySet="ReceiptInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__IdRole__4316F928" Association="StoreManagerModel.FK__Users__IdRole__4316F928">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContractDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IssueInfo" Relationship="StoreManagerModel.FK__IssueInfo__IDCus__4BAC3F29" FromRole="Customer" ToRole="IssueInfo" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IssueInfo" Relationship="StoreManagerModel.FK__IssueInfo__IDIss__4D94879B" FromRole="Issue" ToRole="IssueInfo" />
+        </EntityType>
+        <EntityType Name="IssueInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdProduct" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IDIssue" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IDCustomer" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="IssuePrice" Type="Double" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="StoreManagerModel.FK__IssueInfo__IDCus__4BAC3F29" FromRole="IssueInfo" ToRole="Customer" />
+          <NavigationProperty Name="Issue" Relationship="StoreManagerModel.FK__IssueInfo__IDIss__4D94879B" FromRole="IssueInfo" ToRole="Issue" />
+          <NavigationProperty Name="Product" Relationship="StoreManagerModel.FK__IssueInfo__IdPro__4CA06362" FromRole="IssueInfo" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdUnit" Type="Int32" Nullable="false" />
+          <Property Name="IdSuplier" Type="Int32" Nullable="false" />
+          <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IssueInfo" Relationship="StoreManagerModel.FK__IssueInfo__IdPro__4CA06362" FromRole="Product" ToRole="IssueInfo" />
+          <NavigationProperty Name="Suplier" Relationship="StoreManagerModel.FK__Product__IdSupli__4E88ABD4" FromRole="Product" ToRole="Suplier" />
+          <NavigationProperty Name="Unit" Relationship="StoreManagerModel.FK__Product__IdUnit__4F7CD00D" FromRole="Product" ToRole="Unit" />
+          <NavigationProperty Name="ReceiptInfo" Relationship="StoreManagerModel.FK__ReceiptIn__IdPro__5070F446" FromRole="Product" ToRole="ReceiptInfo" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ReceiptInfo" Relationship="StoreManagerModel.FK__ReceiptIn__IdRec__5165187F" FromRole="Receipt" ToRole="ReceiptInfo" />
+        </EntityType>
+        <EntityType Name="ReceiptInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdProduct" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdReceipt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="ReceiptPrice" Type="Double" />
+          <Property Name="IssuePrice" Type="Double" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="StoreManagerModel.FK__ReceiptIn__IdPro__5070F446" FromRole="ReceiptInfo" ToRole="Product" />
+          <NavigationProperty Name="Receipt" Relationship="StoreManagerModel.FK__ReceiptIn__IdRec__5165187F" FromRole="ReceiptInfo" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Suplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContractDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="StoreManagerModel.FK__Product__IdSupli__4E88ABD4" FromRole="Suplier" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="StoreManagerModel.FK__Product__IdUnit__4F7CD00D" FromRole="Unit" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="StoreManagerModel.FK__Users__IdRole__4316F928" FromRole="UserRole" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRole" Relationship="StoreManagerModel.FK__Users__IdRole__4316F928" FromRole="Users" ToRole="UserRole" />
+        </EntityType>
+        <Association Name="FK__IssueInfo__IDCus__4BAC3F29">
+          <End Type="StoreManagerModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="StoreManagerModel.IssueInfo" Role="IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IssueInfo__IDIss__4D94879B">
+          <End Type="StoreManagerModel.Issue" Role="Issue" Multiplicity="1" />
+          <End Type="StoreManagerModel.IssueInfo" Role="IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Issue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IDIssue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IssueInfo__IdPro__4CA06362">
+          <End Type="StoreManagerModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="StoreManagerModel.IssueInfo" Role="IssueInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="IssueInfo">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IdSupli__4E88ABD4">
+          <End Type="StoreManagerModel.Suplier" Role="Suplier" Multiplicity="1" />
+          <End Type="StoreManagerModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdSuplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IdUnit__4F7CD00D">
+          <End Type="StoreManagerModel.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="StoreManagerModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptIn__IdPro__5070F446">
+          <End Type="StoreManagerModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="StoreManagerModel.ReceiptInfo" Role="ReceiptInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptInfo">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptIn__IdRec__5165187F">
+          <End Type="StoreManagerModel.Receipt" Role="Receipt" Multiplicity="1" />
+          <End Type="StoreManagerModel.ReceiptInfo" Role="ReceiptInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceiptInfo">
+              <PropertyRef Name="IdReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__IdRole__4316F928">
+          <End Type="StoreManagerModel.UserRole" Role="UserRole" Multiplicity="1" />
+          <End Type="StoreManagerModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StoreManagerModelStoreContainer" CdmEntityContainer="StoreManagerEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="StoreManagerModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="MoreInfo" ColumnName="MoreInfo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issue">
+            <EntityTypeMapping TypeName="StoreManagerModel.Issue">
+              <MappingFragment StoreEntitySet="Issue">
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IssueInfo">
+            <EntityTypeMapping TypeName="StoreManagerModel.IssueInfo">
+              <MappingFragment StoreEntitySet="IssueInfo">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IssuePrice" ColumnName="IssuePrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="IDIssue" ColumnName="IDIssue" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="StoreManagerModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="IdSuplier" ColumnName="IdSuplier" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="StoreManagerModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptInfo">
+            <EntityTypeMapping TypeName="StoreManagerModel.ReceiptInfo">
+              <MappingFragment StoreEntitySet="ReceiptInfo">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IssuePrice" ColumnName="IssuePrice" />
+                <ScalarProperty Name="ReceiptPrice" ColumnName="ReceiptPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IdReceipt" ColumnName="IdReceipt" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suplier">
+            <EntityTypeMapping TypeName="StoreManagerModel.Suplier">
+              <MappingFragment StoreEntitySet="Suplier">
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="MoreInfo" ColumnName="MoreInfo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unit">
+            <EntityTypeMapping TypeName="StoreManagerModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="StoreManagerModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="StoreManagerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

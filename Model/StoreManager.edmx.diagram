@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93442041c22a4f8f9d766e27cf545743" Name="Diagram1">
+        <EntityTypeShape EntityType="StoreManagerModel.Customer" Width="1.5" PointX="6" PointY="8.5" />
+        <EntityTypeShape EntityType="StoreManagerModel.Issue" Width="1.5" PointX="6" PointY="1.125" />
+        <EntityTypeShape EntityType="StoreManagerModel.IssueInfo" Width="1.5" PointX="8.25" PointY="4.125" />
+        <EntityTypeShape EntityType="StoreManagerModel.Product" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="StoreManagerModel.Receipt" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreManagerModel.ReceiptInfo" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="StoreManagerModel.Suplier" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="StoreManagerModel.Unit" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="StoreManagerModel.UserRole" Width="1.5" PointX="8.75" PointY="8.375" />
+        <EntityTypeShape EntityType="StoreManagerModel.Users" Width="1.5" PointX="11" PointY="8.125" />
+        <AssociationConnector Association="StoreManagerModel.FK__IssueInfo__IDCus__4BAC3F29" />
+        <AssociationConnector Association="StoreManagerModel.FK__IssueInfo__IDIss__4D94879B" />
+        <AssociationConnector Association="StoreManagerModel.FK__IssueInfo__IdPro__4CA06362" />
+        <AssociationConnector Association="StoreManagerModel.FK__Product__IdSupli__4E88ABD4" />
+        <AssociationConnector Association="StoreManagerModel.FK__Product__IdUnit__4F7CD00D" />
+        <AssociationConnector Association="StoreManagerModel.FK__ReceiptIn__IdPro__5070F446" />
+        <AssociationConnector Association="StoreManagerModel.FK__ReceiptIn__IdRec__5165187F" />
+        <AssociationConnector Association="StoreManagerModel.FK__Users__IdRole__4316F928" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
