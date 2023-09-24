@@ -85,15 +85,50 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Customer.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Issue.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IssueInfo.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Product.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Receipt.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReceiptInfo.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\StoreManager.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StoreManager.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\StoreManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\StoreManager.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StoreManager.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Suplier.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Unit.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserRole.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Users.cs">
+      <DependentUpon>StoreManager.tt</DependentUpon>
     </Compile>
     <Compile Include="UserControlApp\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
@@ -214,6 +249,12 @@
     <Content Include="Model\StoreManager.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StoreManager.Context.cs</LastGenOutput>
+      <DependentUpon>StoreManager.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\StoreManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StoreManager.edmx</DependentUpon>
+      <LastGenOutput>StoreManager.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
