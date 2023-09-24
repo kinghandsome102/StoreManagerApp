@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StoreManagerApp.ViewModel
@@ -22,9 +23,9 @@ namespace StoreManagerApp.ViewModel
 
         public MainViewModel() 
         {
-            LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, 
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, 
                 (p) => { 
-                    Loaded(); 
+                    Loaded(p); 
                 });
             LoadUnitWinDowCommand = new RelayCommand<object>((p) => { return true; },
                (p) => {
@@ -55,11 +56,23 @@ namespace StoreManagerApp.ViewModel
                   ShowUserWindow();
               });
         }
-        public void Loaded()
+        public void Loaded(Window win)
         {
             IsLoaded = true;
+            // hide main, after login dialog end show main window
+            win.Hide();
             LoginScreen loginScreen = new LoginScreen();
             loginScreen.ShowDialog();
+            var LoginVM = loginScreen.DataContext as LoginViewModel;
+            //check login
+            if (LoginVM.IsLogin)
+            {
+                win.Show();
+            }
+            else
+            {
+                win.Close();
+            }
         }
         public void ShowUnitWindow()
         {

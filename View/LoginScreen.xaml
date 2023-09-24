@@ -20,6 +20,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         x:Name="LoginWindow"
+        DataContext="{StaticResource LoginVM}"
         
         Title="Login" Height="450" Width="800">
     <Grid>
@@ -49,15 +50,23 @@
                     <Grid Grid.Row="0">
                         <TextBox 
                                 materialDesign:HintAssist.Hint="User Name"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
                         />
                     </Grid>
                     <Grid Grid.Row="1">
                         <PasswordBox 
                                     x:Name="FloatingPasswordBox"
                                     materialDesign:HintAssist.Hint="Password"
-                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                        />
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                    
+                        >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <i:InvokeCommandAction Command="{Binding PasswordChange}" CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
                     </Grid>
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
@@ -67,16 +76,21 @@
 
                         <Button 
                                 Grid.Column="0"    
-                                Style="{StaticResource MaterialDesignRaisedButton}"    
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                IsDefault="True"
                                 Width="110"
                                 Background="#40BB42"
                                 ToolTip="Resource name: MaterialDesignRaisedButton" Content="Login"
+                                Command="{Binding LoginCommand}"
+                                CommandParameter="{Binding ElementName=LoginWindow}"
                         ></Button>
                         <Button 
                                 Grid.Column="1"    
                                 Style="{StaticResource MaterialDesignRaisedButton}"    
                                 Width="110"    
                                 Background="#DD403E"
+                                Command="{Binding ExitCommand}"
+                                CommandParameter="{Binding ElementName=LoginWindow}"
                                 ToolTip="Resource name: MaterialDesignRaisedButton" Content="Exit"
                         ></Button>
                     </Grid>

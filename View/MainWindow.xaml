@@ -27,7 +27,7 @@
     <!--Event Load Start-->
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=StoreManager}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <!--Event Load end-->
