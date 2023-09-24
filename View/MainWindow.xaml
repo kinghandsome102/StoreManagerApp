@@ -147,7 +147,7 @@
                             </Grid>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="6" ToolTip="User" Background="Transparent">
+                    <Button Grid.Column="6" ToolTip="User" Background="Transparent" Command="{Binding LoadUserWindowCommand}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
