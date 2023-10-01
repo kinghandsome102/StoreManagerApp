@@ -21,6 +21,7 @@
         ResizeMode="NoResize"
         x:Name="Unit"
         
+        DataContext="{StaticResource UnitVM}"
         Title="Unit" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -39,7 +40,7 @@
             <!-- Seclected data from item start-->
             <materialDesign:Card Grid.Row="0" Margin="10">
                 <Grid>
-                    <TextBox Text="{Binding DisplayName}" Margin="10" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Unit Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Unit Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </Grid>
             </materialDesign:Card>
             <!-- Seclected data from item end-->
@@ -55,11 +56,11 @@
             <!--List view data start-->
             <materialDesign:Card Grid.Row="2" Margin="10" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
-                                <GridViewColumn Header="Unit Name" DisplayMemberBinding="{Binding DisplayName}"/>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Unit Name" DisplayMemberBinding="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

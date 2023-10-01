@@ -410,12 +410,12 @@
                                 <ColumnDefinition Width="11*"/>
                                 <ColumnDefinition Width="119*"/>
                             </Grid.ColumnDefinitions>
-                            <ListView Grid.ColumnSpan="2">
+                            <ListView Grid.ColumnSpan="2" ItemsSource="{Binding InventoryList}">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="STT"/>
-                                        <GridViewColumn Header="Product"/>
-                                        <GridViewColumn Header="Quantity"/>
+                                        <GridViewColumn Header="STT" DisplayMemberBinding="{Binding SST}"/>
+                                        <GridViewColumn Header="Product" DisplayMemberBinding="{Binding product.DisplayName}"/>
+                                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Count}"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>

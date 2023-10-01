@@ -28,7 +28,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:ControlBarUC Tag="{Binding Title, ElementName=Customers}"></uc:ControlBarUC>
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=Customer}"></uc:ControlBarUC>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

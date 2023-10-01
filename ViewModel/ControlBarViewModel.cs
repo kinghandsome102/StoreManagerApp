@@ -12,7 +12,7 @@ namespace StoreManagerApp.ViewModel
 {
     public class ControlBarViewModel
     {
-        #region
+        #region Command
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MaximizeWindowCommand { get; set; }
         public ICommand MinimizeWindowCommnand { get; set; }

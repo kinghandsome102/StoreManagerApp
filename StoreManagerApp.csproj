@@ -89,6 +89,7 @@
       <DependentUpon>StoreManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Issue.cs">
       <DependentUpon>StoreManager.tt</DependentUpon>
     </Compile>
@@ -137,6 +138,7 @@
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\UnitViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
