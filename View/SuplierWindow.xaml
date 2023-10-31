@@ -21,6 +21,7 @@
         ResizeMode="NoResize"
         x:Name="Provider"
         
+        DataContext="{StaticResource SuplierVM}"
         Title="Provider" Height="450" Width="850">
     <Grid>
         <Grid.RowDefinitions>
@@ -68,7 +69,7 @@
                         <DatePicker
                           Margin="10 10 10 3"
                           Width="120"
-                          SelectedDate="{Binding ContractDate}"
+                          SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}"
                           materialDesign:HintAssist.Hint="Contract Date"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           VerticalAlignment="Center"
@@ -89,18 +90,25 @@
             <!--List view data start-->
             <materialDesign:Card Grid.Row="2" Margin="10" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding ListSuplier}" SelectedItem="{Binding SelectedItem}" d:ItemsSource="{d:SampleData ItemCount=5}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
                                 <GridViewColumn Header="Unit Name" DisplayMemberBinding="{Binding DisplayName}"/>
                                 <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
                                 <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                                <GridViewColumn Header="More Infomation" DisplayMemberBinding="{Binding Email}"/>
+                                <GridViewColumn Header="More Infomation" DisplayMemberBinding="{Binding MoreInfo}"/>
                                 <GridViewColumn Header="Contract Day" DisplayMemberBinding="{Binding ContractDate}"/>
                             </GridView>
                         </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="Margin" Value="25 0 0 10"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>

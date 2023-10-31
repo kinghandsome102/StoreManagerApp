@@ -1,4 +1,5 @@
-﻿using StoreManagerApp.Model;
+﻿using OpenCvSharp;
+using StoreManagerApp.Model;
 using StoreManagerApp.View;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace StoreManagerApp.ViewModel
         #endregion
         public MainViewModel() 
         {
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, 
+            LoadedWindowCommand = new RelayCommand<System.Windows.Window>((p) => { return true; }, 
                 (p) => { 
                     Loaded(p); 
                 });
@@ -70,7 +71,7 @@ namespace StoreManagerApp.ViewModel
                   ShowUserWindow();
               });
         }
-        public void Loaded(Window win)
+        public void Loaded(System.Windows.Window win)
         {
             IsLoaded = true;
             // hide main, after login dialog end show main window
@@ -151,9 +152,7 @@ namespace StoreManagerApp.ViewModel
                 inventory.SST = i;
                 inventory.Count = SumInput - SumOutput;
                 inventory.product = product;
-
                 InventoryList.Add(inventory);
-
                 i++;
             }
         }
