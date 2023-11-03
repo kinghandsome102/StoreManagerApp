@@ -42,26 +42,26 @@
                 <Grid>
                     <WrapPanel Margin="0 0 0 10">
                         <TextBox Margin="10 0 5 0" 
-                        Text="{Binding DislayName}" VerticalAlignment="Center" 
+                        Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Customer Name" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding Address}" 
+                        Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Address" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding Phone}" 
+                        Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Phone" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding Email}" 
+                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Email" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding MoreInfo}" 
+                        Text="{Binding MoreInfo, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="More Infomation" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -69,7 +69,7 @@
                           Margin="10 14 10 1"
                           Padding="0 0 10 1.5"
                           Width="120"
-                          SelectedDate="{Binding ContractDate}"
+                          SelectedDate="{Binding ContractDate, UpdateSourceTrigger=PropertyChanged}"
                           materialDesign:HintAssist.Hint="Contract Date"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           VerticalAlignment="Center"
@@ -81,7 +81,7 @@
             <!--Button to Working With Data start-->
             <materialDesign:Card Grid.Row="1" Margin="10">
                 <WrapPanel Margin="5">
-                    <Button Content="Add" Margin="5" Width="100" Command="{Binding AddCommand}"></Button>
+                    <Button Content="Add" Margin="5" Width="100" Command="{Binding AddCommand}" ></Button>
                     <Button Content="Edit" Margin="5" Width="100" Command="{Binding EditCommand}"></Button>
                     <Button Content="Delete" Margin="5" Width="100" Command="{Binding DeleteCommand}"></Button>
                 </WrapPanel>

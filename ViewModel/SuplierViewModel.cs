@@ -212,15 +212,7 @@ namespace StoreManagerApp.ViewModel
             {
                 case UIButtonType.Add:
                     {
-                        var AddData = data.Where(item => item.DisplayName == DisplayName).ToList();
-                        if (AddData.Any() || AddData.Count != 0)
-                        {
-                            Ret = false;
-                        }
-                        else
-                        {
-                            Ret = true;
-                        }
+                        Ret = true;
                         break;
                     }
                 case UIButtonType.Edit:
