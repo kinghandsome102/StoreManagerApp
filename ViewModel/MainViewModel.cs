@@ -15,6 +15,7 @@ namespace StoreManagerApp.ViewModel
     public class MainViewModel : BaseViewModel
     {
         #region Property
+        private int idrol = -1;
         public bool IsLoaded { get; set; } = false;
         private ObservableCollection<Inventory> _inventoryList;
 
@@ -24,7 +25,7 @@ namespace StoreManagerApp.ViewModel
             set { _inventoryList = value; OnPropertyChanged(); }
         }
 
-
+        
         #endregion
         #region Command
         public ICommand LoadedWindowCommand { get; set; }
@@ -66,7 +67,7 @@ namespace StoreManagerApp.ViewModel
                (p) => {
                    ShowIssueWindow();
                });
-            LoadUserWindowCommand = new RelayCommand<object>((p) => { return true; },
+            LoadUserWindowCommand = new RelayCommand<FrameworkElement>(IsEnableUser,
               (p) => {
                   ShowUserWindow();
               });
@@ -79,6 +80,7 @@ namespace StoreManagerApp.ViewModel
             LoginScreen loginScreen = new LoginScreen();
             loginScreen.ShowDialog();
             var LoginVM = loginScreen.DataContext as LoginViewModel;
+            idrol = LoginVM.Role;
             //check login
             if (LoginVM.IsLogin)
             {
@@ -124,6 +126,23 @@ namespace StoreManagerApp.ViewModel
         {
             UserWindow userWindow = new UserWindow();
             userWindow.ShowDialog();
+        }
+        public bool IsEnableUser(FrameworkElement sender)
+        {
+            if (!IsLoaded)
+            {
+                return false;
+            }
+            if (idrol != (int)RoleUser.Admin)
+            {
+                sender.Visibility = Visibility.Hidden;
+                return false;
+            }
+            else
+            {
+                sender.Visibility= Visibility.Visible;
+                return true;
+            }
         }
         private void LoadInventoryData()
         {

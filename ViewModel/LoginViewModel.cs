@@ -15,6 +15,7 @@ namespace StoreManagerApp.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
+        public int Role { get; set; }
         public bool IsLogin { get; set; }
         private string _UserName;
 
@@ -35,7 +36,7 @@ namespace StoreManagerApp.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand PasswordChange { get; set; }
         public ICommand ExitCommand { get; set; }
-
+        
         public LoginViewModel() 
         {
             IsLogin = false;
@@ -76,9 +77,10 @@ namespace StoreManagerApp.ViewModel
         private bool CheckAccount()
         {
             var PasswordEncode = MD5Hash(Base64Encode(Password));
-            var Account = DataProvider.Ins.DB.Users.Where(Users => Users.UserName == UserName && Users.Password == PasswordEncode).Count();
-            if (Account > 0)
+            var Account = DataProvider.Ins.DB.Users.Where(Users => Users.UserName == UserName && Users.Password == PasswordEncode).SingleOrDefault();
+            if (Account != null)
             {
+                Role = Account.IdRole;
                 return true;
             }
             return false;

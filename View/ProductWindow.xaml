@@ -43,14 +43,14 @@
                         <TextBox 
                         Text="{Binding DisplayName}" 
                         Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="Unit Name" 
+                        materialDesign:HintAssist.Hint="Products Name" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <ComboBox
                             Margin="10 10 10 0"
                             ItemsSource="{Binding Unit}"
                             SelectedItem="{Binding SelectedUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             materialDesign:ComboBoxAssist.MaxLength="2"
-                            materialDesign:HintAssist.Hint="Search"
+                            materialDesign:HintAssist.Hint="Unit"
                             materialDesign:HintAssist.HintOpacity=".26"
                             IsEditable="True"></ComboBox>
                         <ComboBox
@@ -58,7 +58,7 @@
                             ItemsSource="{Binding Provider}"
                             SelectedItem="{Binding SelectedProvider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             materialDesign:ComboBoxAssist.MaxLength="2"
-                            materialDesign:HintAssist.Hint="Search"
+                            materialDesign:HintAssist.Hint="Provider"
                             materialDesign:HintAssist.HintOpacity=".26"
                             IsEditable="True"></ComboBox>
                         <TextBox 
@@ -91,7 +91,7 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
-                                <GridViewColumn Header="Unit Name" DisplayMemberBinding="{Binding DisplayName}"/>
+                                <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding DisplayName}"/>
                                 <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding Unit.DisplayName}"/>
                                 <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Provider.DisplayName}"/>
                                 <GridViewColumn Header="QR Code" DisplayMemberBinding="{Binding QRCode}"/>

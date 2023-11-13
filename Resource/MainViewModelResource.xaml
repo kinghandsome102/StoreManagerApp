@@ -6,4 +6,6 @@
     <viewmodel:UnitViewModel x:Key="UnitVM"/>
     <viewmodel:SuplierViewModel x:Key="SuplierVM"/>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"/>
+    <viewmodel:UserViewModel x:Key="UserVM"/>
+    <viewmodel:ProductViewModel x:Key="ProductVM"/>
 </ResourceDictionary>

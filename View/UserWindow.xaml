@@ -20,6 +20,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         x:Name="User"
+        DataContext="{StaticResource UserVM}"
         
         Title="User" Height="450" Width="850">
     <Grid>
@@ -43,36 +44,26 @@
                         <TextBox 
                         Text="{Binding DisplayName}" 
                         Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="Unit Name" 
+                        materialDesign:HintAssist.Hint="Name" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        <ComboBox
+                            Margin="10 10 10 0"
+                            ItemsSource="{Binding Role}"
+                            SelectedItem="{Binding SelectedRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            materialDesign:ComboBoxAssist.MaxLength="2"
+                            materialDesign:HintAssist.Hint="Unit"
+                            materialDesign:HintAssist.HintOpacity=".26"
+                            IsEditable="True"></ComboBox>
+                        <TextBox 
+                        Text="{Binding UserName}" 
+                        Margin="10" VerticalAlignment="Center" 
+                        materialDesign:HintAssist.Hint="UserName" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding Address}" 
+                        Text="{Binding Pass}" 
                         Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="Address" 
+                        materialDesign:HintAssist.Hint="Passwork" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <TextBox 
-                        Text="{Binding Phone}" 
-                        Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="Phone" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <TextBox 
-                        Text="{Binding Email}" 
-                        Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="Email" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <TextBox 
-                        Text="{Binding MoreInfo}" 
-                        Margin="10" VerticalAlignment="Center" 
-                        materialDesign:HintAssist.Hint="More Infomation" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <DatePicker
-                          Margin="10 10 10 3"
-                          Width="120"
-                          SelectedDate="{Binding ContractDate}"
-                          materialDesign:HintAssist.Hint="Contract Date"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          VerticalAlignment="Center"
-                         />
                     </WrapPanel>
                 </Grid>
             </materialDesign:Card>
@@ -89,19 +80,22 @@
             <!--Button to Working With Data end-->
             <!--List view data start-->
             <materialDesign:Card Grid.Row="2" Margin="10" VerticalAlignment="Stretch">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding ListUser}" SelectedItem="{Binding SelectedItem}" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
-                                <GridViewColumn Header="Unit Name" DisplayMemberBinding="{Binding DisplayName}"/>
-                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
-                                <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"/>
-                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                                <GridViewColumn Header="More Infomation" DisplayMemberBinding="{Binding Email}"/>
-                                <GridViewColumn Header="Contract Day" DisplayMemberBinding="{Binding ContractDate}"/>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName}"/>
+                                <GridViewColumn Header="Position" DisplayMemberBinding="{Binding UserRole.DisplayName}"/>
+                                <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>
                             </GridView>
                         </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="25 5 0 0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
