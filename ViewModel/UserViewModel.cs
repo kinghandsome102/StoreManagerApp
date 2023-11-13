@@ -181,11 +181,12 @@ namespace StoreManagerApp.ViewModel
                 _RoleDict.Add((RoleUser)userRole.Id, userRole.DisplayName);
                 Role.Add(userRole.DisplayName);
             }
+            AddCommand = new RelayCommand<object>(IsEnableAdd, AddUser);
         }
         public bool IsEnableAdd(object arg)
         {
 
-            throw new NotImplementedException();
+            return true;
         }
         public bool IsEnableEdit(object arg) 
         {  
@@ -205,9 +206,20 @@ namespace StoreManagerApp.ViewModel
             {
                 UserName = _UserName,
                 DisplayName = _DisplayName,
-                
-                
+                Password = _Pass,
             };
+            foreach (var role in _RoleDict)
+            {
+                if (role.Value == SelectedRole)
+                {
+                    NewUser.IdRole = (int)role.Key;
+                    break;
+                }
+            }
+            UserDB.Add(NewUser);
+            DataProvider.Ins.DB.SaveChanges();
+            ListUser.Clear();
+            ListUser = new ObservableCollection<Users>(UserDB);
         }
         public void DeleteUser(object arg)
         {
