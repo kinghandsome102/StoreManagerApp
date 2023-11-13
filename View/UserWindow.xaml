@@ -42,7 +42,7 @@
                 <Grid>
                     <WrapPanel Margin="0 0 0 10">
                         <TextBox 
-                        Text="{Binding DisplayName}" 
+                        Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Name" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -55,12 +55,12 @@
                             materialDesign:HintAssist.HintOpacity=".26"
                             IsEditable="True"></ComboBox>
                         <TextBox 
-                        Text="{Binding UserName}" 
+                        Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="UserName" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <TextBox 
-                        Text="{Binding Pass}" 
+                        Text="{Binding Pass, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="10" VerticalAlignment="Center" 
                         materialDesign:HintAssist.Hint="Passwork" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

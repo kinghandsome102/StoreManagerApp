@@ -8,6 +8,7 @@ using StoreManagerApp.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.SqlServer.Server;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace StoreManagerApp.ViewModel
 {
@@ -182,23 +183,33 @@ namespace StoreManagerApp.ViewModel
                 Role.Add(userRole.DisplayName);
             }
             AddCommand = new RelayCommand<object>(IsEnableAdd, AddUser);
+            DeleteCommand = new RelayCommand<object>(IsEnableDelete, DeleteUser);
+            EditCommand = new RelayCommand<object>(IsEnableEdit, EditUser);
+            ChangePasswordCommand = new RelayCommand<object>(IsEnableChangePassword, ChangePasswordUser);
         }
         public bool IsEnableAdd(object arg)
         {
-
+            if (!CheckEnable(UIButtonType.Add))
+            {
+                return false;
+            }
             return true;
         }
         public bool IsEnableEdit(object arg) 
-        {  
-            throw new NotImplementedException(); 
+        {
+            if (!CheckEnable(UIButtonType.Edit))
+            {
+                return false;
+            } 
+            return true;
         }
         public bool IsEnableDelete(object arg) 
         {
-            throw new NotImplementedException();
+            return true;
         }
         public bool IsEnableChangePassword(object arg)
         {
-            return false;
+            return true;
         }
         public void AddUser(object arg)
         {
@@ -221,19 +232,30 @@ namespace StoreManagerApp.ViewModel
             ListUser.Clear();
             ListUser = new ObservableCollection<Users>(UserDB);
         }
+        public void ChangePasswordUser(object arg)
+        {
+            
+        }
         public void DeleteUser(object arg)
         {
                 
-            throw new NotImplementedException();
+
         }
         public void EditUser(object arg)
         {
 
-            throw new NotImplementedException();
+            
         }
         public bool CheckInputData()
         {
-
+            if (string.IsNullOrEmpty(SelectedRole)          ||
+                string.IsNullOrEmpty(UserName)              ||
+                string.IsNullOrEmpty(Pass)                  ||
+                string.IsNullOrEmpty(DisplayName)
+                )
+            {
+                return false;
+            }
             return true;
         }
         public bool CheckEnable(UIButtonType type)
